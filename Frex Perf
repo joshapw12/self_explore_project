@@ -6,7 +6,7 @@ deliveryorders_deliveryorder.trip_id,
 deliveryorders_deliveryorderstatus.status,
 to_char(deliveryorders_deliveryorderstatus.created, 'DD-MM-YYYY') as date_created,
 deliveryorders_deliveryorder.pickup_time as pickup_time,
-to_char(deliveryorders_deliveryorder.delivery_time, 'HH24:MM') as delivery_time,
+deliveryorders_deliveryorder.delivery_time as delivery_time,
 deliveryorders_deliveryorder.weight as weight,
 deliveryorders_proofofdelivery.received_amount
 from
