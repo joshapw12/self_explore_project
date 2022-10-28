@@ -1,0 +1,15 @@
+select
+deliveryorders_deliveryorderstatus.delivery_order_id,
+fulfillment_id,
+awb,
+deliveryorders_deliveryorder.trip_id,
+deliveryorders_deliveryorderstatus.status,
+to_char(deliveryorders_deliveryorderstatus.created, 'DD-MM-YYYY') as date_created,
+deliveryorders_deliveryorder.pickup_time as pickup_time,
+to_char(deliveryorders_deliveryorder.delivery_time, 'HH24:MM') as delivery_time,
+deliveryorders_deliveryorder.weight as weight,
+deliveryorders_proofofdelivery.received_amount
+from
+deliveryorders_deliveryorder
+left join deliveryorders_deliveryorderstatus on deliveryorders_deliveryorder.id = deliveryorders_deliveryorderstatus.delivery_order_id
+left join deliveryorders_proofofdelivery on deliveryorders_deliveryorder.id = deliveryorders_proofofdelivery.delivery_order_id
