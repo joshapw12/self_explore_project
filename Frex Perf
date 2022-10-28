@@ -8,6 +8,7 @@ to_char(deliveryorders_deliveryorderstatus.created, 'DD-MM-YYYY') as date_create
 deliveryorders_deliveryorder.pickup_time as pickup_time,
 deliveryorders_deliveryorder.delivery_time as delivery_time,
 deliveryorders_deliveryorder.weight as weight,
+deliveryorders_deliveryorder.product_value,
 deliveryorders_proofofdelivery.received_amount
 from
 deliveryorders_deliveryorder
