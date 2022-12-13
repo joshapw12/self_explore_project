@@ -1,0 +1,28 @@
+SELECT 
+frex.tanggal_awb,
+frex.awb,
+frex.fulfillment_id,
+ff.company_name as tenant,
+frex.driver_name,
+  case
+    when MAX(frex.status_frex) = 1 then 'Created'
+    when MAX(frex.status_frex) = 2 then 'Pick Up'
+    when MAX(frex.status_frex) = 3 then 'Arrived'
+    when MAX(frex.status_frex) = 4 then 'Completed'
+    when MAX(frex.status_frex) = 5 then 'Cancel'
+    when MAX(frex.status_frex) = 6 then 'Failed'
+  end as status_frex,
+ffrex.created,
+ffrex.picked,
+ffrex.arrived,
+ffrex.completed,
+ffrex.canceled,
+ffrex.failed
+FROM query_242 as frex
+LEFT join query_249 as ff on frex.fulfillment_id = ff.order_id
+LEFT join query_316 as ffrex on frex.fulfillment_id = ffrex.fulfillment_id
+where
+(frex.tanggal_awb between '{{ Tanggal AWB.start }}' and '{{ Tanggal AWB.end }}')
+and ('{{ Tenant }}' = 'Pilih Semua' or ff.company_name = '{{ Tenant }}')
+group by frex.awb
+order by tanggal_awb DESC
